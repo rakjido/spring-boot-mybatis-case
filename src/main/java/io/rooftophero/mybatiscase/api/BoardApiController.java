@@ -3,18 +3,27 @@ package io.rooftophero.mybatiscase.api;
 import io.rooftophero.mybatiscase.domain.Board;
 import io.rooftophero.mybatiscase.domain.ResponseFormat;
 import io.rooftophero.mybatiscase.service.BoardService;
+import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api(tags = {"1. Board"})
 @RestController
 @RequiredArgsConstructor
 public class BoardApiController {
 
     private final BoardService boardService;
 
+    @ApiOperation(value = "Board 추가", notes = "Board를 추가한다.")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "성공"),
+//            @ApiResponse(code = 201, message = "Board를 성공적으로 추가", response = ResponseFormat.class),
+//            @ApiResponse(code = 400, message = "잘못된 데이터를 입력했습니다.", response = ErrorFormat.class),
+//            @ApiResponse(code = 401, message = "사용자 로그인을 하지 않았습니다.", response = ErrorFormat.class),
+//            @ApiResponse(code = 403, message = "사용권한이 없습니다.", response = ErrorFormat.class)})
     @PostMapping("/api/boards")
     public ResponseEntity<?> addBoard(@RequestBody Board board) {
         try {
@@ -28,8 +37,9 @@ public class BoardApiController {
 
     }
 
+    @ApiOperation(value = "Board 조회", notes = "특정 ID의 Board를 조회한다.")
     @GetMapping("/api/boards/{id}")
-    public ResponseEntity<?> findBoard(@PathVariable("id") Long id) {
+    public ResponseEntity<?> findBoard(@ApiParam(value = "Board ID", required = true, example = "1" ) @PathVariable("id") Long id) {
         try {
             List<Board> board = boardService.findBoard(id);
             ResponseFormat<Board> response = ResponseFormat.<Board>builder().message("ok").data(board).build();
@@ -42,6 +52,7 @@ public class BoardApiController {
         }
     }
 
+    @ApiOperation(value = "Board 수정", notes = "Board를 업데이트한다.")
     @PutMapping("/api/boards")
     public ResponseEntity<?> modifyBoard(@RequestBody Board board) {
         try {
@@ -54,6 +65,7 @@ public class BoardApiController {
         }
     }
 
+    @ApiOperation(value = "Board 삭제", notes = "특정한 Board를 삭제한다.")
     @DeleteMapping("/api/boards")
     public ResponseEntity<?> removeBoard(@RequestBody Board board) {
         try {
@@ -67,6 +79,7 @@ public class BoardApiController {
 
     }
 
+    @ApiOperation(value = "Board 리스트 조회", notes = "Board 리스트를 조회한다.")
     @GetMapping("/api/boards")
     public ResponseEntity<?> listBoard(){
         try {
