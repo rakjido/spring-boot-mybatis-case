@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: headerFragment" />
+<body>
+    <main class="board-main">
+        <div class="container">
+            <article>
+                <section>
+                    <div class="board-title">
+                        <h2>게시글 등록</h2>
+                    </div>
+                </section>
+                <section>
+                    <div class="board-form">
+                        <form>
+                            <div class="form-group">
+                                <label for="boardType"> 게시판 </label>
+                                <select class="form-control" id="boardType">
+                                    <option>공지사항</option>
+                                    <option>자유게시판</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="title">제목</label>
+                                <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
+                            </div>
+                            <div class="form-group">
+                                <label for="userId"> 작성자 </label>
+                                <input type="text" class="form-control" id="userId" placeholder="작성자를 입력하세요">
+                            </div>
+                            <div class="form-group">
+                                <label for="content"> 내용 </label>
+                                <textarea class="form-control" rows="15" id="content" placeholder="내용을 입력하세요"></textarea>
+                            </div>
+                        </form>
+                        <div class="board-btn-group">
+                            <button type="button" class="btn btn-primary" id="btn-board-save">등록</button>
+                            <a href="/" role="button" class="btn btn-secondary">취소</a>
+                        </div>
+                    </div>
+            </section>
+            </article>
+
+        </div> <!-- /container -->
+    </main>
+
+<div th:replace="fragments/footer :: footerFragment" />
+</body>
+</html>

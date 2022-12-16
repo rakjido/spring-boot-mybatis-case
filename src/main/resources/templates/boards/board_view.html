@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: headerFragment" />
+<body>
+    <main class="board-main">
+        <div class="container">
+            <article>
+
+                <section>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="delete-id" th:value="${board.id}">
+                    </div>
+                    <div class="title-area">
+                        <h3 class="title-text" th:text="${board.title}">제목</h3>
+                    </div>
+                    <div class="writer-info">
+                        <div class="user-info" th:text="${board.userId}"></div>
+                    </div>
+                    <hr>
+                </section>
+                <section>
+                    <div class="article-viewer">
+                        <p class="article-content" th:utext="*{#strings.replace(board.content, lineSeparator, '&lt;br /&gt;')}"/>
+                    </div>
+                    <hr>
+                    <div class="board-btn-group">
+                        <a href="/" role="button" class="btn btn-secondary">목록</a>
+                        <a th:href="@{|/boards/update/${board.id}|}" role="button" class="btn btn-primary" id="href-board-update">수정</a>
+                        <button type="button" class="btn btn-primary" id="btn-board-delete">삭제</button>
+                    </div>
+                </section>
+            </article>
+        </div> <!-- /container -->
+    </main>
+
+    <div th:replace="fragments/footer :: footerFragment" />
+</body>
+</html>

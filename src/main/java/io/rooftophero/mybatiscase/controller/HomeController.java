@@ -1,19 +1,21 @@
 package io.rooftophero.mybatiscase.controller;
 
-import org.apache.tomcat.jni.Local;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
-
-@RestController
+@Controller
 public class HomeController {
 
-    @GetMapping("/hello")
-    public ResponseEntity<?> home(Local local) {
-        LocalDateTime now = LocalDateTime.now();
-        String hello = "Hello, world! " + now;
-        return ResponseEntity.ok().body(hello);
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/boards";
     }
+
+    @GetMapping("/test")
+    public String test(Model model) {
+        model.addAttribute("data", "Hello");
+        return "test";
+    }
+
 }

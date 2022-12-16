@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: headerFragment" />
+<body>
+    <main class="error-main">
+        <div class="error-title">
+            <h1 th:text="|ERROR ${errorCode}|">Error</h1>
+        </div>
+        <div class="error-btn-group">
+            <a href="/" role="button" class="btn btn-secondary">Go Home</a>
+        </div>
+    </main>
+
+<div th:replace="fragments/footer :: footerFragment" />
+
+</body>
+</html>

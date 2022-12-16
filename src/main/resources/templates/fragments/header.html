@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="headerFragment">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-
+      to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/style.css">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    </head>
+
+    <nav class="navbar">
+        <div class="navbar__logo">
+            <a href="/">Spring Boot</a>
+        </div>
+        <ul class="navbar__menu">
+            <li><a href="/">공지사항</a></li>
+            <li><a href="/boards">자유게시판</a></li>
+        </ul>
+        <ul class="navbar__auth">
+            <li><a href="">로그인</a></li>
+            <li><a href="">회원가입</a></li>
+        </ul>
+        <a href="#" class="navbar__toggleBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Menu</title><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="48" d="M88 152h336M88 256h336M88 360h336"/></svg>
+        </a>
+
+    </nav>
+
+</th:block>

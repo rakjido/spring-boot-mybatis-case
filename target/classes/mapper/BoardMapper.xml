@@ -31,6 +31,6 @@
     <select id="listBoard" resultType="Board">
         SELECT id, title, content, board_type, user_id, created_date, updated_date
         FROM board
-        ORDER BY created_date DESC
+        ORDER BY id DESC
     </select>
 </mapper>
