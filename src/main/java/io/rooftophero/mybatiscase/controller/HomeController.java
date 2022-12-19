@@ -9,7 +9,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return "redirect:/boards";
+        return "redirect:/boards?page=1&size=10";
     }
 
     @GetMapping("/test")

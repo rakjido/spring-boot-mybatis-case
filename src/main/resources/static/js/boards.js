@@ -8,7 +8,7 @@ $(document).ready(function() {
             content : $("#content").val()
         };
 
-        // alert(JSON.stringify(board));
+//        alert(JSON.stringify(board));
 
         $.ajax({
             type : "POST",
@@ -16,7 +16,7 @@ $(document).ready(function() {
             data : JSON.stringify(board),
             contentType : "application/json; charset=UTF-8",
             success : function() {
-           //     alert("Created");
+//                alert("Created");
                 window.location.href = "/";
             },
             error : function(xhr, testStatus, error) {
@@ -37,7 +37,7 @@ $(document).ready(function() {
             content : $("#content").val()
         };
 
-        // alert(JSON.stringify(board));
+//        alert(JSON.stringify(board));
 
         $.ajax({
             type : "PUT",
@@ -45,7 +45,7 @@ $(document).ready(function() {
             data : JSON.stringify(board),
             contentType : "application/json; charset=UTF-8",
             success : function() {
-            //    alert("Updated");
+//                alert("Updated");
                 window.location.href = "/";
             },
             error : function(xhr, testStatus, error) {
@@ -68,7 +68,7 @@ $(document).ready(function() {
             data : JSON.stringify(board),
             contentType : "application/json; charset=UTF-8",
             success : function() {
-            //    alert("Deleted");
+//                alert("Deleted");
                 window.location.href = "/";
             },
             error : function(xhr, status, error) {

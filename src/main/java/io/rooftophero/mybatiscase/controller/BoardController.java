@@ -1,6 +1,7 @@
 package io.rooftophero.mybatiscase.controller;
 
 import io.rooftophero.mybatiscase.domain.Board;
+import io.rooftophero.mybatiscase.domain.Pagination;
 import io.rooftophero.mybatiscase.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -55,12 +57,35 @@ public class BoardController {
     }
 
     @GetMapping("/boards")
-    public String boardList(Model model) {
+    public String boardListPagination(Model model,
+                                      @RequestParam(value = "page", defaultValue = "1") int pageNumber,
+                                      @RequestParam(value = "size", defaultValue = "10") int pageSize) {
+
         String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
         log.info(getClass().getName() + " / " + methodName);
 
-        List<Board> boards = boardService.listBoard();
+        int totalNumber = boardService.totalCountBoard();
+        Pagination pagination = Pagination.builder()
+                .pageNumber(pageNumber)
+                .pageSize(pageSize)
+                .totalNumber(totalNumber)
+                .build();
+        List<Board> boards = boardService.listBoardPagination(pagination);
+        log.info("currentNumber : " + pagination.getCurrentNumber());
+
         model.addAttribute("boards", boards);
+        model.addAttribute("pagination", pagination);
+
         return "boards/board";
     }
+
+//    @GetMapping("/boards")
+//    public String boardList(Model model) {
+//        String methodName = new Object() {}.getClass().getEnclosingMethod().getName();
+//        log.info(getClass().getName() + " / " + methodName);
+//
+//        List<Board> boards = boardService.listBoard();
+//        model.addAttribute("boards", boards);
+//        return "boards/board";
+//    }
 }

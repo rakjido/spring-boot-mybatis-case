@@ -13,7 +13,7 @@
         FROM board
         WHERE id = #{id}
     </select>
-    
+
     <update id="updateBoard" parameterType="Board">
         UPDATE board
         SET title = #{title},
@@ -32,5 +32,17 @@
         SELECT id, title, content, board_type, user_id, created_date, updated_date
         FROM board
         ORDER BY id DESC
+    </select>
+
+    <select id="listBoardPagination" resultType="Board">
+        SELECT id, title, content, board_type, user_id, created_date, updated_date
+        FROM board
+        ORDER BY id DESC
+        LIMIT #{pageSize} OFFSET #{currentNumber}
+    </select>
+
+    <select id="totalCountBoard" resultType="Integer">
+        SELECT COUNT(*)
+        FROM board;
     </select>
 </mapper>

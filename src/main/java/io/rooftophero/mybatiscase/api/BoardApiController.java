@@ -1,6 +1,7 @@
 package io.rooftophero.mybatiscase.api;
 
 import io.rooftophero.mybatiscase.domain.Board;
+import io.rooftophero.mybatiscase.domain.Pagination;
 import io.rooftophero.mybatiscase.domain.ResponseFormat;
 import io.rooftophero.mybatiscase.service.BoardService;
 import io.swagger.annotations.*;
@@ -79,11 +80,18 @@ public class BoardApiController {
 
     }
 
-    @ApiOperation(value = "Board 리스트 조회", notes = "Board 리스트를 조회한다.")
+    @ApiOperation(value = "Board 리스트 페이지 조회", notes = "Board 리스트 페이지를 조회한다.")
     @GetMapping("/api/boards")
-    public ResponseEntity<?> listBoard(){
+    public ResponseEntity<?> listBoardPagination(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
+                                                 @RequestParam(value = "size", defaultValue = "10") int pageSize) {
         try {
-            List<Board> boards = boardService.listBoard();
+            int totalNumber = boardService.totalCountBoard();
+            Pagination pagination = Pagination.builder()
+                                                .pageNumber(pageNumber)
+                                                .pageSize(pageSize)
+                                                .totalNumber(totalNumber)
+                                                .build();
+            List<Board> boards = boardService.listBoardPagination(pagination);
             ResponseFormat<Board>  response = ResponseFormat.<Board>builder().message("ok").data(boards).build();
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
@@ -91,4 +99,32 @@ public class BoardApiController {
             return ResponseEntity.badRequest().body(response);
         }
     }
+
+//    @ApiOperation(value = "Board 리스트 조회", notes = "Board 리스트를 조회한다.")
+//    @GetMapping("/api/boards")
+//    public ResponseEntity<?> listBoard(){
+//        try {
+//            List<Board> boards = boardService.listBoard();
+//            ResponseFormat<Board>  response = ResponseFormat.<Board>builder().data(boards).build();
+//            return ResponseEntity.ok().body(response);
+//        } catch (Exception e) {
+//            ResponseFormat<String> response = ResponseFormat.<String>builder().message(e.getMessage()).build();
+//            return ResponseEntity.badRequest().body(response);
+//        }
+//    }
+
+//    @ApiOperation(value = "Board 리스트 페이지 조회", notes = "Board 리스트 페이지를 조회한다.")
+//    @GetMapping("/api/boards")
+//    public ResponseEntity<?> listBoardPagination(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
+//                                                 @RequestParam(value = "size", defaultValue = "10") int pageSize) {
+//        try {
+//            List<Board> boards = boardService.listBoardPagination(pageNumber, pageSize);
+//            ResponseFormat<Board>  response = ResponseFormat.<Board>builder().data(boards).build();
+//            return ResponseEntity.ok().body(response);
+//        } catch (Exception e) {
+//            ResponseFormat<String> response = ResponseFormat.<String>builder().message(e.getMessage()).build();
+//            return ResponseEntity.badRequest().body(response);
+//        }
+//    }
+
 }

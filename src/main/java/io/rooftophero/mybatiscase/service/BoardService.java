@@ -1,6 +1,7 @@
 package io.rooftophero.mybatiscase.service;
 
 import io.rooftophero.mybatiscase.domain.Board;
+import io.rooftophero.mybatiscase.domain.Pagination;
 import io.rooftophero.mybatiscase.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,4 +42,29 @@ public class BoardService {
     public List<Board> listBoard() {
         return boardMapper.listBoard();
     }
+
+    public List<Board> listBoardPagination(Pagination pagination) {
+        return boardMapper.listBoardPagination(pagination);
+    }
+
+//    public List<Board> listBoardPagination(Pagination pagination) {
+//        return boardMapper.listBoardPagination(pagination.getPageNumber(), pagination.getPageSize());
+//    }
+
+
+//    public List<Board> listBoardPagination(int pageNumber, int pageSize) {
+//        int totalNumber = boardMapper.totalCountBoard();
+//        Pagination pagination = Pagination.builder()
+//                                        .pageNumber(pageNumber)
+//                                        .pageSize(pageSize)
+//                                        .totalNumber(totalNumber)
+//                                        .build();
+//        return boardMapper.listBoardPagination(pagination.getPageNumber(), pagination.getPageSize());
+//    }
+
+
+    public int totalCountBoard() {
+        return boardMapper.totalCountBoard();
+    }
+
 }

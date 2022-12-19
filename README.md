@@ -153,3 +153,7 @@ always는 테이블생성과 insert를 시작할 때마다 생성한다. never�
 
 ## 05. Board 화면 Thymeleaf 구현
 
+---
+
+## 06. Board Pagination
+
